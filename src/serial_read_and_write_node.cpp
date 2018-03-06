@@ -59,11 +59,15 @@ int main (int argc, char** argv){
     while(ros::ok()){
 
         ros::spinOnce();
+/*        
+        char testStr[] = "1500,1500,";
+        ser.write(testStr);
+*/
 
         if(ser.available()){
             ROS_INFO_STREAM("Reading from serial port");
             std_msgs::String result;
-            result.data = ser.readline(ser.available());
+            result.data = ser.read(ser.available());
             ROS_INFO_STREAM("Read: " << result.data);
             read_pub.publish(result);
         }
